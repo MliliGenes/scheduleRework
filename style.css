@@ -1,4 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/vampire-raves");
+@import url("https://fonts.cdnfonts.com/css/jersey-m54");
 :root {
   --text: #f2fafc;
   --background: #09232a;
@@ -12,12 +12,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: color 80ms ease-out, background-color 150ms ease-out, border 150ms;
 }
 
 body {
   min-height: 100vh;
   background-color: var(--background);
-  font-family: "Vampire Raves", sans-serif;
+  font-family: "Jersey M54", sans-serif;
 }
 body.dark {
   --text: #f2fafc;
@@ -25,13 +26,24 @@ body.dark {
   --primary: #973a20;
   --secondary: #0c2d37;
   --accent: #d55b39;
+  --check: #e33d2b;
 }
 body.light {
-  --text: #0a0d0f;
-  --background: #edf0f3;
-  --primary: #627e93;
-  --secondary: #cbd5dc;
-  --accent: #587184;
+  --text: #040201;
+  --background: #ffffff;
+  --primary: #e59f71;
+  --secondary: #f7e2d4;
+  --accent: #d76e28;
+  --check: #e79940;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 99;
+  background-image: url(./Layer\ 2.png);
+  mix-blend-mode: soft-light;
+  opacity: 0.1;
+  pointer-events: none;
 }
 .nav {
   width: 100%;
@@ -44,7 +56,7 @@ body.light {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  border: var(--accent) solid 0.5px;
+  border: var(--accent) solid 2px;
 }
 .aside,
 .logo,
@@ -56,15 +68,16 @@ body.light {
 .groups,
 .theme {
   background-color: var(--secondary);
-  border: var(--accent) solid 0.5px;
+  /* border: var(--accent) solid 0.5px; */
 }
 .aside {
-  grid-row: span 10;
-  grid-column: span 3;
+  grid-row: span 11;
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 15px;
+  border-right: var(--accent) solid 2px;
 }
 .theme {
   grid-column: span 2;
@@ -72,28 +85,37 @@ body.light {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: var(--accent) solid 2px;
 }
 .groups {
-  grid-column: span 3;
+  grid-column: span 2;
   grid-row: span 1;
+  border-bottom: var(--accent) solid 2px;
+  border-right: var(--accent) solid 2px;
 }
 .logo {
   grid-row: span 1;
   grid-column: span 3;
+  border-bottom: var(--accent) solid 2px;
+  border-right: var(--accent) solid 2px;
 }
 .title {
   grid-row: span 1;
-  grid-column: span 4;
+  grid-column: span 5;
+  border-bottom: var(--accent) solid 2px;
+  border-right: var(--accent) solid 2px;
 }
 .me {
   grid-row: span 1;
-  grid-column: span 3;
+  grid-column: span 2;
+  border-top: var(--accent) solid 2px;
+  border-right: var(--accent) solid 2px;
 }
 
 .center {
   position: relative;
   grid-row: span 10;
-  grid-column: span 9;
+  grid-column: span 10;
   padding: 15px;
   overflow-y: auto;
 }
@@ -102,16 +124,19 @@ body.light {
   background-color: var(--background);
 }
 .center::-webkit-scrollbar-thumb {
-  background-color: var(--text);
+  background-color: var(--accent);
   border-radius: 20px;
 }
 .foot {
   grid-row: span 1;
   grid-column: span 6;
+  border-top: var(--accent) solid 2px;
+  border-right: var(--accent) solid 2px;
 }
 .links {
   grid-row: span 1;
-  grid-column: span 3;
+  grid-column: span 2;
+  border-top: var(--accent) solid 2px;
 }
 .aside > ul {
   overflow-y: auto;
@@ -151,7 +176,7 @@ body.light {
 h2 {
   flex: 1 0;
   height: 100%;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--text);
   display: flex;
   justify-content: center;
@@ -160,6 +185,10 @@ h2 {
 }
 h2 > a {
   color: var(--text);
+  transition: 250ms ease-out;
+}
+h2 > a:hover {
+  color: var(--accent);
 }
 .aside > ul li:hover,
 .aside > ul li.active {
@@ -191,15 +220,24 @@ h2 > a {
 }
 .center > .table-responsive td,
 .center > .table-responsive th {
+  position: relative;
   padding: 15px 0;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  z-index: 0;
   border: 0.5px solid var(--accent);
 }
-
+.center > .table-responsive td.check::before {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  inset: 0;
+  background-color: var(--check);
+  opacity: 0.25;
+}
 .center > .table-responsive tr td:nth-child(1) {
   background-color: var(--primary);
 }
@@ -232,7 +270,7 @@ h2 > a {
   left: 50%;
   top: 5px;
   translate: -50% 0;
-  transition: 250ms;
+  transition: 250ms ease-out;
 }
 
 body.light .toggle .circle {
@@ -240,5 +278,5 @@ body.light .toggle .circle {
 }
 
 body.dark .toggle .circle {
-  translate: 0;
+  translate: -5%;
 }

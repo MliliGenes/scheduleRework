@@ -76,7 +76,7 @@ list.forEach((item) => {
 });
 
 function getSchedule(group) {
-  groupSelected.textContent = `" ${group.groupe} "`;
+  groupSelected.textContent = ` ${group.groupe} `;
   tableArea.classList.add("blur");
   const options = {
     method: "POST",
@@ -92,6 +92,50 @@ function getSchedule(group) {
     .then((data) => {
       tableArea.innerHTML = "";
       tableArea.innerHTML = data;
+      tableArea.querySelectorAll("td").forEach((td) => {
+        if (td.textContent != "-") {
+          td.classList.add("check");
+        } else {
+          td.textContent = "";
+        }
+      });
+      // tableArea.innerHTML = replace(data, translationMap);
       tableArea.classList.remove("blur");
     });
+}
+
+const translationMap = {
+  "Jour/Horaire": "Day/Time",
+  LUNDI: "MONDAY",
+  MARDI: "TUESDAY",
+  MERCREDI: "WEDNESDAY",
+  JEUDI: "THURSDAY",
+  VENDREDI: "FRIDAY",
+  SAMEDI: "SATURDAY",
+  "08h30mn-11h00mn": "8:30 AM - 11:00 AM",
+  "11h00mn-13h30mn": "11:00 AM - 1:30 PM",
+  "13h30mn-16h00mn": "1:30 PM - 4:00 PM",
+  "16h00mn-18h30mn": "4:00 PM - 6:30 PM",
+  "SALLE 3": "ROOM 3",
+  "SALLE 7": "ROOM 7",
+  "SALLE 4": "ROOM 4",
+  "SALLE 2": "ROOM 2",
+  "SALLE 1": "ROOM 1",
+};
+
+function replace(htmlText, translationMap) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = htmlText;
+
+  const textNodes = tempDiv.querySelectorAll("*");
+
+  textNodes.forEach((node) => {
+    const originalText = node.textContent.trim();
+    const translatedText = translationMap[originalText];
+    if (translatedText) {
+      node.textContent = translatedText;
+    }
+  });
+
+  return tempDiv.innerHTML;
 }
