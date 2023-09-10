@@ -1,10 +1,10 @@
 @import url("https://fonts.cdnfonts.com/css/vampire-raves");
 :root {
-  --text: #ffffff;
-  --background: #0b1a28;
-  --primary: #b67135;
-  --secondary: #08131c;
-  --accent: #ba7336;
+  --text: #f2fafc;
+  --background: #09232a;
+  --primary: #973a20;
+  --secondary: #0c2d37;
+  --accent: #d55b39;
 }
 *,
 *::before,
@@ -12,14 +12,26 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: red 1px solid; */
 }
 
 body {
   min-height: 100vh;
   background-color: var(--background);
   font-family: "Vampire Raves", sans-serif;
-  /* letter-spacing: 1.5px; */
+}
+body.dark {
+  --text: #f2fafc;
+  --background: #09232a;
+  --primary: #973a20;
+  --secondary: #0c2d37;
+  --accent: #d55b39;
+}
+body.light {
+  --text: #0a0d0f;
+  --background: #edf0f3;
+  --primary: #627e93;
+  --secondary: #cbd5dc;
+  --accent: #587184;
 }
 .nav {
   width: 100%;
@@ -32,7 +44,7 @@ body {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  border: var(--text) solid 1px;
+  border: var(--accent) solid 0.5px;
 }
 .aside,
 .logo,
@@ -41,38 +53,46 @@ body {
 .center,
 .foot,
 .links,
-.groups {
+.groups,
+.theme {
   background-color: var(--secondary);
-  border: var(--text) solid 1px;
+  border: var(--accent) solid 0.5px;
 }
 .aside {
-  grid-row: span 8;
+  grid-row: span 10;
   grid-column: span 3;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 15px;
 }
+.theme {
+  grid-column: span 2;
+  grid-row: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .groups {
   grid-column: span 3;
-  grid-row: span 2;
+  grid-row: span 1;
 }
 .logo {
-  grid-row: span 2;
+  grid-row: span 1;
   grid-column: span 3;
 }
 .title {
-  grid-row: span 2;
-  grid-column: span 3;
+  grid-row: span 1;
+  grid-column: span 4;
 }
 .me {
-  grid-row: span 2;
+  grid-row: span 1;
   grid-column: span 3;
 }
 
 .center {
   position: relative;
-  grid-row: span 8;
+  grid-row: span 10;
   grid-column: span 9;
   padding: 15px;
   overflow-y: auto;
@@ -86,11 +106,11 @@ body {
   border-radius: 20px;
 }
 .foot {
-  grid-row: span 2;
-  grid-column: span 9;
+  grid-row: span 1;
+  grid-column: span 6;
 }
 .links {
-  grid-row: span 2;
+  grid-row: span 1;
   grid-column: span 3;
 }
 .aside > ul {
@@ -108,13 +128,14 @@ body {
   background-color: var(--background);
 }
 .aside > ul::-webkit-scrollbar-thumb {
-  background-color: var(--text);
+  background-color: var(--primary);
 }
 
 .aside > ul li {
   position: relative;
   display: flex;
   padding: 15px 0;
+  min-height: 70px;
   align-items: center;
   justify-content: center;
   transition: 250ms ease-out;
@@ -124,13 +145,13 @@ body {
   content: "";
   width: 100%;
   height: 1.2px;
-  background-color: var(--text);
+  background-color: var(--accent);
   bottom: 0%;
 }
 h2 {
   flex: 1 0;
   height: 100%;
-  font-size: 28px;
+  font-size: 24px;
   color: var(--text);
   display: flex;
   justify-content: center;
@@ -142,7 +163,8 @@ h2 > a {
 }
 .aside > ul li:hover,
 .aside > ul li.active {
-  background-color: var(--background);
+  background-color: var(--primary);
+  color: var(--text);
 }
 
 .center > .table-responsive {
@@ -160,7 +182,7 @@ h2 > a {
   position: relative;
   width: 100%;
   border-collapse: collapse;
-  border: 0.5px solid var(--text);
+  border: 0.5px solid var(--accent);
 }
 
 .center > .table-responsive tr {
@@ -175,11 +197,11 @@ h2 > a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 0.5px solid var(--text);
+  border: 0.5px solid var(--accent);
 }
 
 .center > .table-responsive tr td:nth-child(1) {
-  background-color: var(--background);
+  background-color: var(--primary);
 }
 .center.blur {
   filter: blur(2px);
@@ -188,4 +210,35 @@ h2 > a {
 .links > h2 {
   display: flex;
   gap: 8px;
+}
+.theme .toggle {
+  position: relative;
+  width: 55px;
+  height: 35px;
+  background-color: var(--background);
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+}
+.theme > .toggle .circle {
+  position: absolute;
+  width: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  color: var(--accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  left: 50%;
+  top: 5px;
+  translate: -50% 0;
+  transition: 250ms;
+}
+
+body.light .toggle .circle {
+  translate: -100%;
+}
+
+body.dark .toggle .circle {
+  translate: 0;
 }

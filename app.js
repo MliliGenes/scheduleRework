@@ -1,7 +1,47 @@
+let body = document.body;
+
 let groups = document.querySelector("[data-groups]");
 let list = [...groups.querySelectorAll("li")];
 let tableArea = document.querySelector(".center");
 let groupSelected = document.querySelector(".logo h2");
+
+let toggle = document.querySelector(".toggle");
+let themeIcon = document.querySelector(".fa-solid");
+
+var themes = JSON.parse(localStorage.getItem("themes")) || {};
+
+setTheme();
+renderTheme();
+
+function setTheme() {
+  body.classList.add(`${themes["theme"]}`);
+}
+
+function renderTheme() {
+  if (themes["theme"] == "light") {
+    body.classList.add("light");
+    body.classList.remove("dark");
+    themeIcon.classList.remove("fa-moon");
+    themeIcon.classList.add("fa-sun");
+  } else {
+    body.classList.add("dark");
+    body.classList.remove("light");
+    themeIcon.classList.add("fa-moon");
+    themeIcon.classList.remove("fa-sun");
+  }
+}
+
+toggle.addEventListener("click", () => {
+  if (themes["theme"] == "light") {
+    themes["theme"] = "dark";
+    localStorage.setItem("themes", JSON.stringify(themes));
+    renderTheme();
+  } else {
+    themes["theme"] = "light";
+    localStorage.setItem("themes", JSON.stringify(themes));
+    renderTheme();
+  }
+});
 
 window.addEventListener("load", () => {
   let defaultGroup = { groupe: "DEVOWFS203" };
