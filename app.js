@@ -91,7 +91,8 @@ function getSchedule(group) {
     })
     .then((data) => {
       tableArea.innerHTML = "";
-      tableArea.innerHTML = data;
+      console.log(data);
+      // tableArea.innerHTML = data;
       tableArea.querySelectorAll("td").forEach((td) => {
         if (td.textContent != "-") {
           td.classList.add("check");
@@ -99,7 +100,7 @@ function getSchedule(group) {
           td.textContent = "";
         }
       });
-      // tableArea.innerHTML = replace(data, translationMap);
+      tableArea.innerHTML = replace(data, translationMap);
       tableArea.classList.remove("blur");
     });
 }
@@ -116,11 +117,7 @@ const translationMap = {
   "11h00mn-13h30mn": "11:00 AM - 1:30 PM",
   "13h30mn-16h00mn": "1:30 PM - 4:00 PM",
   "16h00mn-18h30mn": "4:00 PM - 6:30 PM",
-  "SALLE 3": "ROOM 3",
-  "SALLE 7": "ROOM 7",
-  "SALLE 4": "ROOM 4",
-  "SALLE 2": "ROOM 2",
-  "SALLE 1": "ROOM 1",
+  SALLE: "ROOM",
 };
 
 function replace(htmlText, translationMap) {
