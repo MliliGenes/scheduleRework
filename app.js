@@ -92,7 +92,7 @@ function getSchedule(group) {
     .then((data) => {
       tableArea.innerHTML = "";
       console.log(data);
-      // tableArea.innerHTML = data;
+      tableArea.innerHTML = replace(data, translationMap);
       tableArea.querySelectorAll("td").forEach((td) => {
         if (td.textContent != "-") {
           td.classList.add("check");
@@ -100,7 +100,6 @@ function getSchedule(group) {
           td.textContent = "";
         }
       });
-      tableArea.innerHTML = replace(data, translationMap);
       tableArea.classList.remove("blur");
     });
 }
