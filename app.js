@@ -91,10 +91,11 @@ function getSchedule(group) {
     })
     .then((data) => {
       tableArea.innerHTML = "";
-      console.log(data);
       tableArea.innerHTML = replace(data, translationMap);
+    })
+    .then(() => {
       tableArea.querySelectorAll("td").forEach((td) => {
-        if (td.textContent != "-") {
+        if (td.innerText != "-") {
           td.classList.add("check");
         } else {
           td.textContent = "";
